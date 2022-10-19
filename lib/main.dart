@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.amber,
       ),
       home: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         appBar: AppBar(),
       ),
     );
