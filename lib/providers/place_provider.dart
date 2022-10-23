@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import '../models/place.dart';
 import 'dart:io';
-import '../helpers/db_helpers.dart';
+import '../helpers/db_helper.dart';
 
 class PlaceProvider with ChangeNotifier {
   List<Place> _items = [];
