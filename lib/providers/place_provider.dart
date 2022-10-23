@@ -38,4 +38,10 @@ class PlaceProvider with ChangeNotifier {
         .toList();
     notifyListeners();
   }
+
+  void deletePlaces(String id) {
+    _items.removeWhere((element) => element.id == id);
+    DBHelper.delete('user_places', id);
+    notifyListeners();
+  }
 }

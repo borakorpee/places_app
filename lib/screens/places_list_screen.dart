@@ -23,25 +23,35 @@ class PlacesListScreen extends StatelessWidget {
       body: FutureBuilder(
         future: Provider.of<PlaceProvider>(context, listen: false)
             .fetchAndSetPlaces(),
-        builder: (ctx, snapshot) =>
-            snapshot.connectionState == ConnectionState.waiting
-                ? Center(child: CircularProgressIndicator())
-                : Consumer<PlaceProvider>(
-                    child: const Center(child: Text('No Places Yet')),
-                    builder: (ctx, places, ch) => places.items.length == 0
-                        ? ch
-                        : ListView.builder(
-                            itemCount: places.items.length,
-                            itemBuilder: (ctx, i) => ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: FileImage(
-                                  places.items[i].image,
-                                ),
-                              ),
-                              title: Text(places.items[i].title),
-                              onTap: () {},
+        builder: (ctx, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? Center(child: CircularProgressIndicator())
+            : Consumer<PlaceProvider>(
+                child: const Center(child: Text('No Places Yet')),
+                builder: (ctx, places, ch) => places.items.length == 0
+                    ? ch
+                    : ListView.builder(
+                        itemCount: places.items.length,
+                        itemBuilder: (ctx, i) => ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: FileImage(
+                              places.items[i].image,
                             ),
-                          )),
+                          ),
+                          title: Text(places.items[i].title),
+                          onTap: () {},
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
+                            onPressed: () {
+                              Provider.of<PlaceProvider>(context, listen: false)
+                                  .deletePlaces(places.items[i].id);
+                            },
+                          ),
+                        ),
+                      )),
       ),
     );
   }
