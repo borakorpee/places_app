@@ -1,9 +1,11 @@
 // ignore_for_file: deprecated_member_use
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/providers/place_provider.dart';
-import 'package:flutter_complete_guide/widgets/image_input.dart';
 import 'package:provider/provider.dart';
+
+import '../providers/place_provider.dart';
+import '../widgets/image_input.dart';
+import '../widgets/location_input.dart';
 
 class AddPlaceScreen extends StatefulWidget {
   static const routeName = '/add-place';
@@ -50,7 +52,9 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       controller: _titlecontroller,
                     ),
                     SizedBox(height: 10),
-                    ImageInput(_selectImage)
+                    ImageInput(_selectImage),
+                    SizedBox(height: 10),
+                    LocationInput(),
                   ],
                 ),
               ),
