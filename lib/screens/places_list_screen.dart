@@ -27,7 +27,7 @@ class PlacesListScreen extends StatelessWidget {
                 ConnectionState.waiting
             ? Center(child: CircularProgressIndicator())
             : Consumer<PlaceProvider>(
-                child: const Center(child: Text('No Places Yet')),
+                child: const Center(child: Text('No Places Added Yet')),
                 builder: (ctx, places, ch) => places.items.length == 0
                     ? ch
                     : ListView.builder(
