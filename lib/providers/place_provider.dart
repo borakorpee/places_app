@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import '../models/place.dart';
 import 'dart:io';
 import '../helpers/db_helper.dart';
+import '../helpers/location_helper.dart';
 
 class PlaceProvider with ChangeNotifier {
   List<Place> _items = [];
@@ -10,12 +11,20 @@ class PlaceProvider with ChangeNotifier {
     return [..._items];
   }
 
-  void addPlace(String pickedTitle, File pickedImage) {
+  Future<void> addPlace(String pickedTitle, File pickedImage,
+      PlaceLocation pickedLocation) async {
+    final address = await LocationHelper.getPlaceAddress(
+        pickedLocation.lat, pickedLocation.long);
+    final updateLocation = PlaceLocation(
+      lat: pickedLocation.lat,
+      long: pickedLocation.long,
+      address: address,
+    );
     final newPlace = Place(
       id: DateTime.now().toString(),
       title: pickedTitle,
       image: pickedImage,
-      location: null,
+      location: updateLocation,
     );
     _items.add(newPlace);
     notifyListeners();
@@ -23,6 +32,9 @@ class PlaceProvider with ChangeNotifier {
       'id': newPlace.id,
       'title': newPlace.title,
       'image': newPlace.image.path,
+      'loc_lat': newPlace.location.lat,
+      'loc_lng': newPlace.location.long,
+      'address': newPlace.location.address,
     });
   }
 
@@ -33,7 +45,11 @@ class PlaceProvider with ChangeNotifier {
               id: item['id'],
               title: item['title'],
               image: File(item['image']),
-              location: null,
+              location: PlaceLocation(
+                lat: item['loc_lat'],
+                long: item['loc_lng'],
+                address: item['address'],
+              ),
             ))
         .toList();
     notifyListeners();
