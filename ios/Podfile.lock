@@ -51,7 +51,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  google_maps_flutter: df4e7de95264aa0a2f11aac0fc7e313acb8ffc7e
+  google_maps_flutter: d0dd62f5a7d39bae61057eb9f52dd778d99c7c6c
   GoogleMaps: 008e2c80e38605b56b560e8deb73d4194ff30bef
   image_picker: e3eacd46b94694dde7cf2705955cece853aa1a8f
   location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
